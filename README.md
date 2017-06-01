@@ -1,13 +1,16 @@
 # CPP Husky A200 Stereo Vision
 Review Status: Not Reviewed
 ## Introduction
-This document covers Stereoscopic Vision specified in [Cal Poly Pomona's Self Driving Husky A200](https://github.com/cpp-self-driving-husky/cpp-husky-a200-design-doc). Stereoscopic Vision is one way for an autonomous vehicle to determine how far away an object is. On the Husky A200, a stereoscopic camera will be used along with LIDAR and sonar in order to aid in obstacle avoidance.
+This document covers Stereoscopic Vision specified in [Cal Poly Pomona's Self Driving Husky A200](https://github.com/cpp-self-driving-husky/cpp-husky-a200-design-doc). Stereoscopic Vision is one way for an autonomous vehicle to determine how far away an object is.
 ## User Stories
 * As a user, I want to be able to rely on the data that the stereoscopic camera is giving to the Husky A200.
 ## Requirements
 * The vehicle shall detect stationary obstacles to avoid.
 * The vehicle shall use multiple sensor types that are unrelated in data acquisition method to detecct obstacles.
 ## Solution
+On the Husky A200, a stereoscopic camera will be used along with LIDAR and sonar in order to aid in obstacle avoidance. A stereoscopic camera takes two images (one from each camera) and then creates a disparity map. This disparity map can be used to calculate the depth an object is away from the camera.
+
+
 ## Important Data From ROS Topics
 * ### Data from sensor_msgs/Image
     * This topic can give the image matrix data as a single array with size step * rows
@@ -29,6 +32,8 @@ This document covers Stereoscopic Vision specified in [Cal Poly Pomona's Self Dr
         * These two can be used to calculate the depth from the camera using the equation Z = fT / d
     * The min and max disparity are given so that the min and max depth so that we know the points outside the range could not be seen
     * Finally the smallest allowed increment in disparity is given (as a float, delta_d) which allows us to calculate the smallest achievable depth range resolution using the euqation delta_Z = (Z^2/fT)*delta_d
+## Terms
+* Disparity Map: When two images are taken from slightly different locations, the objects in the image appear to shift. This apparent shifting (or difference in pixel positions) between the two images is called disparity. The disparity between the two images creates the disparity map.
 ## References
 * [ROS Topic sensor_msgs/Image Documentation](http://docs.ros.org/api/sensor_msgs/html/msg/Image.html)
 * [ROS Topic sensor_msgs/CameraInfo Documentation](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html)
