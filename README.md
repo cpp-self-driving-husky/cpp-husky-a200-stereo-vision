@@ -9,8 +9,7 @@ This document covers Stereoscopic Vision specified in [Cal Poly Pomona's Self Dr
 * The vehicle shall use multiple sensor types that are unrelated in data acquisition method to detecct obstacles.
 ## Solution
 On the Husky A200, a stereoscopic camera will be used along with LIDAR and sonar in order to aid in obstacle avoidance. A stereoscopic camera takes two images (one from each camera) and then creates a disparity map. This disparity map can be used to calculate the depth an object is away from the camera.
-
-
+![Stereoscopic Vision Design Diagram](images/stereoVisionProcess.png)
 ## Important Data From ROS Topics
 * ### Data from sensor_msgs/Image
     * This topic can give the image matrix data as a single array with size step * rows
